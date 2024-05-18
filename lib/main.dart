@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget returnAddButton(String name, {bool isAdd = true}) {
+    Widget returnAddOrRemoveButton(String name, {bool isAdd = true}) {
       return TextButton(
           onPressed: () {
             if (isAdd) {
@@ -90,17 +90,17 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                returnAddButton('1'),
-                returnAddButton('2'),
-                returnAddButton('3'),
+                returnAddOrRemoveButton('1'),
+                returnAddOrRemoveButton('2'),
+                returnAddOrRemoveButton('3'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                returnAddButton('4'),
-                returnAddButton('5'),
-                returnAddButton('6'),
+                returnAddOrRemoveButton('4'),
+                returnAddOrRemoveButton('5'),
+                returnAddOrRemoveButton('6'),
               ],
             ),
             const SizedBox(height: 20),
@@ -108,17 +108,17 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                returnAddButton('1', isAdd: false),
-                returnAddButton('2', isAdd: false),
-                returnAddButton('3', isAdd: false),
+                returnAddOrRemoveButton('1', isAdd: false),
+                returnAddOrRemoveButton('2', isAdd: false),
+                returnAddOrRemoveButton('3', isAdd: false),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                returnAddButton('4', isAdd: false),
-                returnAddButton('5', isAdd: false),
-                returnAddButton('6', isAdd: false),
+                returnAddOrRemoveButton('4', isAdd: false),
+                returnAddOrRemoveButton('5', isAdd: false),
+                returnAddOrRemoveButton('6', isAdd: false),
               ],
             ),
             const SizedBox(height: 40),
