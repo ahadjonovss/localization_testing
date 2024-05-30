@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:localization_testing/localization/data/models.dart';
+import 'package:localization_testing/localization/extensions/extensions.dart';
 import 'package:localization_testing/localization/last.dart';
+import 'package:localization_testing/localization/manager/manager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,12 +31,11 @@ void main() {
     ),
   ];
 
-  LocalizationManager locManager = LocalizationManager(
-    supportedLocales: supportedLocales,
-    initialLocale: const Locale('en', 'US'),
-    initialTranslations: ['1'],
-    debugMode: false,
-  );
+  LocalizationManager locManager = LocalizationManager.init(
+      supportedLocales: supportedLocales,
+      initialLocale: Locale('uz', 'UZ'),
+      initialTranslations: ['1'],
+      debugMode: true);
 
   runApp(MyApp(localizationManager: locManager));
 }
@@ -45,8 +47,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LocalizationProvider(
-      localizationManager: localizationManager,
+    return LocProvider(
+      locManger: localizationManager,
       child: MaterialApp(
         title: 'Dynamic Localization Demo',
         home: HomeScreen(),
@@ -55,7 +57,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Widget returnAddOrRemoveButton(String name, {bool isAdd = true}) {
@@ -72,19 +79,25 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('app_title'.tr(context)),
+        title: Text('app_title'.tr()),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState((){});
+        },
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Title: ${'title'.tr(context)}'),
-            Text('1:${'one'.tr(context)}'),
-            Text('2:${'two'.tr(context)}'),
-            Text('3:${'three'.tr(context)}'),
-            Text('4:${'four'.tr(context)}'),
-            Text('5:${'five'.tr(context)}'),
-            Text('6:${'six'.tr(context)}'),
+            Text('Title: ${'title'.tr()}'),
+            Text('1:${'one.a.b.c'.trParams({'name': 'Samandar'})}'),
+            Text('2:${'two'.tr()}'),
+            Text('one.a.b.c')
+                .trParams(context, params: {'name': 'Samandar'}),
+            Text('4:${'four'.tr()}'),
+            Text('5:${'five'.tr()}'),
+            Text('6:${'six'.tr()}'),
             const SizedBox(height: 20),
             const Text('Adding'),
             Row(

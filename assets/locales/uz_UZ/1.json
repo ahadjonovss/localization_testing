@@ -1,4 +1,12 @@
 {
   "title": "Bu o'zbek tili",
-  "one": "Bir"
+  "one": {
+    "a": {
+      "b": {
+        "c": "hello @name"
+
+      }
+    }
+  }
+
 }

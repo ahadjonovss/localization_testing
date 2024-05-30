@@ -1,4 +1,11 @@
 {
   "title": "This is English",
-  "one": "One"
+  "one": {
+    "a": {
+      "b": {
+        "c": "hello @name"
+
+      }
+    }
+  }
 }
