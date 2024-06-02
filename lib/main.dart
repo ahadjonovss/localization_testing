@@ -31,33 +31,33 @@ void main() {
     ),
   ];
 
-  LocalizationManager locManager = LocalizationManager.init(
+  LocalizationManager locManager = LocalizationManager(
       supportedLocales: supportedLocales,
-      initialLocale: Locale('uz', 'UZ'),
+      initialLocale: const Locale('uz', 'UZ'),
       initialTranslations: ['1'],
       debugMode: true);
 
-  runApp(MyApp(localizationManager: locManager));
+  runApp(LocalizationProvider(
+    localizationManager: locManager,
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  final LocalizationManager localizationManager;
 
-  MyApp({required this.localizationManager});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LocProvider(
-      locManger: localizationManager,
-      child: MaterialApp(
-        title: 'Dynamic Localization Demo',
-        home: HomeScreen(),
-      ),
+    return const MaterialApp(
+      title: 'Dynamic Localization Demo',
+      home: HomeScreen(),
     );
   }
 }
 
 class HomeScreen extends StatefulWidget {
+
+  const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -77,6 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Text('${isAdd ? '+' : '-'} $name'));
     }
 
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('app_title'.tr()),
@@ -93,8 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Text('Title: ${'title'.tr()}'),
             Text('1:${'one.a.b.c'.trParams({'name': 'Samandar'})}'),
             Text('2:${'two'.tr()}'),
-            Text('one.a.b.c')
-                .trParams(context, params: {'name': 'Samandar'}),
+            const Text('one.a.b.c')
+                .trParams(params: {'name': 'Samandar'}),
             Text('4:${'four'.tr()}'),
             Text('5:${'five'.tr()}'),
             Text('6:${'six'.tr()}'),
