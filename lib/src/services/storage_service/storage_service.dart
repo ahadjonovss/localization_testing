@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 /// A service class for storing and retrieving locale settings using the SharedPreferences library.
 ///
 /// This class provides static methods to initialize SharedPreferences, save a locale,

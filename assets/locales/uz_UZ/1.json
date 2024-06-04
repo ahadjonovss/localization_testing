@@ -7,6 +7,13 @@
 
       }
     }
-  }
-
+  },
+  "son": {
+    "one": "Bir dedim",
+    "two": "Ikki dedim {}",
+    "few": "Few dedim",
+    "many": "Many dedim",
+    "other": "Other dedim"
+  },
+  "new": "salom"
 }
