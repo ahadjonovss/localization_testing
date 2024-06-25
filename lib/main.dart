@@ -55,6 +55,8 @@ class HomeScreen extends StatelessWidget {
       return TextButton(
           onPressed: () {
             if (isAdd) {
+              context.reloadTranslations();
+              context.reloadTranslation(name);
               context.addTranslation(name);
             } else {
               context.removeTranslation(name);
@@ -78,6 +80,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Text('(2) ${'two'.tr()}'),
             Text('(2) ${tr('money', count: 3, namedArgs: {'name': "Salom"})}'),
+
             const SizedBox(height: 40),
             Text('adding'.tr()), // Section title.
             Row(
