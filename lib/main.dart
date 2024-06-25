@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
             Text('(1) ${tr('one.a.b.c', namedArgs: {'name': "Shavkat"})}'),
             const SizedBox(height: 20),
             Text('(2) ${'two'.tr()}'),
-            Text('(2) ${'money'.trPlural(3)}'),
+            Text('(2) ${tr('money', count: 3, namedArgs: {'name': "Salom"})}'),
             const SizedBox(height: 40),
             Text('adding'.tr()), // Section title.
             Row(

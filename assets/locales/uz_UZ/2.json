@@ -3,7 +3,7 @@
   "money": {
     "one": "Pulingiz kam",
     "two": "Pulingiz o'rtacha",
-    "few": "Pulingiz yetarli {}",
+    "few": "Pulingiz yetarli {} va isming {name}",
     "many": "Pulingizga yashasa bo'ladi {}",
     "other": "Siz boysiz! {}"
   }
