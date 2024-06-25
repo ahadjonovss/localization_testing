@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:localization_testing/src/helpers/src/reassamble.dart';
 import 'package:localization_testing/src/manager/localization_manager.dart';
 
+import '../models/src/supported_translation.dart';
+import '../models/src/translation.dart';
 import '../models/src/supported_locale.dart';
 
 /// Provides a localization manager to the widget tree.
@@ -15,8 +17,9 @@ class LocalizationProvider extends InheritedWidget {
 
   /// The localization manager that holds and manages all localization data.
   late final LocalizationManager _localizationManager;
+  List<SupportedLocale> supportedLocales = [];
 
-  final List<SupportedLocale> supportedLocales;
+  List<SupportedTranslation> supportedTranslations;
   final Locale initialLocale;
   final List<String> initialTranslations;
   final bool debugMode;
@@ -30,17 +33,28 @@ class LocalizationProvider extends InheritedWidget {
   /// [localizationManager].
   /// [localizationManager] The single instance of [LocalizationManager] to be provided
   /// to all dependent widgets.
-  LocalizationProvider({
-    Key? key,
-    required Widget child,
-    required this.supportedLocales,
-    required this.initialTranslations,
-    this.debugMode = false,
-    required this.initialLocale,
-    this.saveLocale = false})
+  LocalizationProvider(
+      {Key? key,
+      required Widget child,
+      required this.initialTranslations,
+      this.debugMode = false,
+      required this.initialLocale,
+      required this.supportedTranslations,
+      this.saveLocale = false})
       : super(
-      key: key ?? instanceKey,
-      child: debugMode ? ReassembleListener(child: child) : child) {
+            key: key ?? instanceKey,
+            child: debugMode ? ReassembleListener(child: child) : child) {
+    List<Locale> locales = supportedTranslations[0].paths.keys.toList();
+    for (Locale locale in locales) {
+      List<Translation> translations = [];
+      for (SupportedTranslation tr in supportedTranslations) {
+        translations
+            .add(Translation(name: tr.name, path: tr.paths[locale].toString()));
+      }
+      SupportedLocale supLocale =
+          SupportedLocale(locale: locale, translations: translations);
+      supportedLocales.add(supLocale);
+    }
     _localizationManager = LocalizationManager(
       supportedLocales: supportedLocales,
       initialLocale: initialLocale,

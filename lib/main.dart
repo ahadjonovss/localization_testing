@@ -1,33 +1,27 @@
-import 'package:localization_testing/localization_provider.dart';
+import 'localization_provider.dart';
 
 /// Main entry point of the application.
 /// Initializes the localization manager with supported locales and translations.
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  List<SupportedLocale> supportedLocales = [
-    // English locale with multiple translation files.
-    SupportedLocale(
-      locale: const Locale('en', 'US'),
-      translations: [
-        SupportedTranslation(name: '1', path: 'assets/locales/en_US/1.json'),
-        SupportedTranslation(name: '2', path: 'assets/locales/en_US/2.json'),
-        SupportedTranslation(name: '3', path: 'assets/locales/en_US/3.json'),
-      ],
-    ),
-    // Uzbek locale with multiple translation files.
-    SupportedLocale(
-      locale: const Locale('uz', 'UZ'),
-      translations: [
-        SupportedTranslation(name: '1', path: 'assets/locales/uz_UZ/1.json'),
-        SupportedTranslation(name: '2', path: 'assets/locales/uz_UZ/2.json'),
-        SupportedTranslation(name: '3', path: 'assets/locales/uz_UZ/3.json'),
-      ],
-    ),
+  List<SupportedTranslation> supportedTranslations = [
+    SupportedTranslation(name: '1', paths: {
+      const Locale('en', 'US'): 'assets/locales/en_US/1.json',
+      const Locale('uz', 'UZ'): 'assets/locales/uz_UZ/1.json',
+    }),
+    SupportedTranslation(name: '2', paths: {
+      const Locale('en', 'US'): 'assets/locales/en_US/2.json',
+      const Locale('uz', 'UZ'): 'assets/locales/uz_UZ/2.json',
+    }),
+    SupportedTranslation(name: '3', paths: {
+      const Locale('en', 'US'): 'assets/locales/en_US/3.json',
+      const Locale('uz', 'UZ'): 'assets/locales/uz_UZ/3.json',
+    })
   ];
 
   // Run the application with the localization provider.
   runApp(LocalizationProvider(
-      supportedLocales: supportedLocales,
+      supportedTranslations: supportedTranslations,
       initialLocale: const Locale('uz', 'UZ'),
       initialTranslations: ['1'],
       debugMode: true,
@@ -80,7 +74,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             Text('(1) Title: ${'title'.tr()}'), // Translated strings.
             Text('(1) ${'make.plove.not.war'.tr()}'), // Translated strings.
-            Text('(1) ${'one'.tr()}'),
+            Text('(1) ${tr('one.a.b.c', namedArgs: {'name': "Shavkat"})}'),
             const SizedBox(height: 20),
             Text('(2) ${'two'.tr()}'),
             Text('(2) ${'money'.trPlural(3)}'),
@@ -111,12 +105,12 @@ class HomeScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () =>
                       context.changeLocale(const Locale('uz', 'UZ')),
-                  child:  Text('uzbek'.tr()),
+                  child: Text('uzbek'.tr()),
                 ),
                 ElevatedButton(
                   onPressed: () =>
                       context.changeLocale(const Locale('en', 'US')),
-                  child:  Text('english'.tr()),
+                  child: Text('english'.tr()),
                 ),
               ],
             )

@@ -3,7 +3,7 @@
   "one": {
     "a": {
       "b": {
-        "c": "hello @name"
+        "c": "hello {name}"
 
       }
     }

@@ -1,4 +1,4 @@
-package com.example.localization_testing
+package com.example.
 
 import io.flutter.embedding.android.FlutterActivity
 

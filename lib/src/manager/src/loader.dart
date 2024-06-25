@@ -24,9 +24,9 @@ class LoaderPro {
   /// [translation] is the translation object to load.
   /// [supportedLocales] is the list of supported locales.
   Future<Map<String, dynamic>> loadTranslation(
-      SupportedTranslation translation, {
-        required List<SupportedLocale> supportedLocales,
-      }) async {
+    Translation translation, {
+    required List<SupportedLocale> supportedLocales,
+  }) async {
     logger.log("Loading translation: ${translation.name}", type: LogType.info);
     Map<String, String> localizedStrings = {};
     try {
@@ -48,10 +48,10 @@ class LoaderPro {
   /// [supportedLocales] is the list of supported locales.
   /// [trs] is the set of translation keys to load.
   Future<Map<String, dynamic>> loadTranslations(
-      Locale locale, {
-        required List<SupportedLocale> supportedLocales,
-        required Set<String> trs,
-      }) async {
+    Locale locale, {
+    required List<SupportedLocale> supportedLocales,
+    required Set<String> trs,
+  }) async {
     Map<String, dynamic> translations = {};
     for (String name in trs) {
       var translation = supportedLocales
@@ -91,10 +91,10 @@ class LoaderPro {
   /// [supportedLocales] is the list of supported locales.
   /// [initialTranslations] is the set of initial translation keys to load.
   Future<Map<String, dynamic>> loadInitialTranslations(
-      Locale locale, {
-        required List<SupportedLocale> supportedLocales,
-        required Set<String> initialTranslations,
-      }) async {
+    Locale locale, {
+    required List<SupportedLocale> supportedLocales,
+    required Set<String> initialTranslations,
+  }) async {
     logger.log(
         "Loading initial translations for locale: ${locale.toLanguageTag()}",
         type: LogType.init);
@@ -107,9 +107,9 @@ class LoaderPro {
   /// [translation] is the translation to reload.
   /// [supportedLocales] is the list of supported locales.
   Future<Map<String, dynamic>> reLoadTranslation(
-      SupportedTranslation translation,
-      List<SupportedLocale> supportedLocales,
-      ) async {
+    Translation translation,
+    List<SupportedLocale> supportedLocales,
+  ) async {
     return await loadTranslation(translation,
         supportedLocales: supportedLocales);
   }
@@ -120,10 +120,10 @@ class LoaderPro {
   /// [currentLocale] is the current locale.
   /// [trs] is the set of translation keys to reload.
   Future<Map<String, dynamic>> reLoadTranslations(
-      List<SupportedLocale> supportedLocales,
-      Locale currentLocale,
-      Set<String> trs,
-      ) async {
+    List<SupportedLocale> supportedLocales,
+    Locale currentLocale,
+    Set<String> trs,
+  ) async {
     return await loadTranslations(currentLocale,
         supportedLocales: supportedLocales, trs: trs);
   }
